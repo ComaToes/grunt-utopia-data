@@ -19,14 +19,7 @@ module.exports = function(grunt) {
   // creation: http://gruntjs.com/creating-tasks
 
   grunt.registerMultiTask('utopia_data', 'The best Grunt plugin ever.', function() {
-    // Merge task-specific and/or target-specific options with these defaults.
-    var options = this.options({
-      punctuation: '.',
-      separator: ', '
-    });
 	
-	grunt.log.writeln("files"+this.files);
-
     // Iterate over all specified file groups.
     this.files.forEach(function(f) {
       // Concat specified files.
@@ -193,7 +186,8 @@ module.exports = function(grunt) {
 					
 					adjustFactions(card);
 					
-					out.captains.push(card);
+					if( ignoreCards.indexOf(card.id) < 0 )
+						out.captains.push(card);
 					
 				});
 				
@@ -217,7 +211,8 @@ module.exports = function(grunt) {
 					
 					adjustFactions(card);
 					
-					out.admirals.push(card);
+					if( ignoreCards.indexOf(card.id) < 0 )
+						out.admirals.push(card);
 					
 				});
 				
@@ -246,7 +241,8 @@ module.exports = function(grunt) {
 					if( card.range )
 						card.range = card.range.trim().replace( /(.)\-(.)/, "$1 - $2" );
 					
-					out.upgrades.push(card);
+					if( ignoreCards.indexOf(card.id) < 0 )
+						out.upgrades.push(card);
 					
 				});
 				
@@ -276,7 +272,7 @@ module.exports = function(grunt) {
 						factions: [data.Faction.toLowerCase()],
 						text: convertIconTags( data.Ability ),
 						cost: Number( data.Cost ),
-						skill: Number( data.Skill ),
+						skill: Number( data.CaptainSkillBonus ),
 						upgradeSlots: [],
 						isSkillModifier: true,
 						showType: true,
