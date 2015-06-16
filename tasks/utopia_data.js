@@ -199,11 +199,11 @@ module.exports = function(grunt) {
 						set: data.Set.split(","),
 						name: data.Title,
 						unique: (data.Unique == "Y") || (data.MirrorUniverseUnique == "Y"),
-						text: convertIconTags( data.Ability ),
+						text: convertIconTags( data.AdmiralAbility ),
 						factions: [data.Faction.toLowerCase()],
-						cost: Number( data.Cost ),
-						skill: Number( data.Skill ),
-						talents: Number( data.Talent ),
+						cost: Number( data.AdmiralCost ),
+						skill: Number( data.SkillModifier ),
+						talents: Number( data.AdmiralTalent ),
 					};
 
 					if( data.AdditionalFaction )
