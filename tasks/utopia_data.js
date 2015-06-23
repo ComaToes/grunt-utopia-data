@@ -413,7 +413,7 @@ module.exports = function(grunt) {
 };
 
 function convertIconTags(str) {
-	str = str.replace( /\attack: \[target lock\]/ig, "ATTACK: (Target Lock)" );
+	str = str.replace( /attack:? \[target lock\]/ig, "ATTACK: (Target Lock)" );
 	str = str.replace( /\[hit\]/ig, "[hit]" );
 	str = str.replace( /\[crit(ical)?( hit)?\]/ig, "[crit]" );
 	str = str.replace( /\[eva(de|sive|sion)( maneuvers)?\]/ig, "[evade]" );
@@ -429,7 +429,9 @@ function convertIconTags(str) {
 	str = str.replace( /\[weapon\]/ig, "[weapon]" );
 	str = str.replace( /\[borg\]/ig, "[borg]" );
 	str = str.replace( /\[straight\]/ig, "[forward]" );
+	str = str.replace( /\[([1-9]) forward\]/ig, "$1 [forward]" );
 	str = str.replace( /\[reverse\]/ig, "[reverse]" );
+	str = str.replace( /\[reverse direction\]/ig, "[come-about]" );
 	str = str.replace( /\[double hit\]/ig, "[hit][hit]" );
 	return str;
 }
