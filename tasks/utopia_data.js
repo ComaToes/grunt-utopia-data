@@ -10,7 +10,12 @@
 
 var xml2js = require("xml2js");
 
-var ignoreCards = [ "jean_luc_picard_71531", "jean_luc_picard_c_71531", "jean_luc_picard_d_71531", "chakotay_b_71528", "calvin_hudson_b_71528", "calvin_hudson_c_71528", "sakharov_c_71997p" ];
+var ignoreCards = [ "jean_luc_picard_71531", "jean_luc_picard_c_71531", "jean_luc_picard_d_71531", 
+					"chakotay_b_71528", "calvin_hudson_b_71528", "calvin_hudson_c_71528", 
+					"sakharov_c_71997p",
+					"systems_upgrade_c_71998p", "systems_upgrade_w_71998p",
+					"assault_vessel_upgrade_w_71803", "assault_vessel_upgrade_c_71803",
+				  ];
 var factions = [ "Federation", "Klingon", "Romulan", "Dominion", "Borg", "Species 8472", "Kazon", "Bajoran", "Ferengi", "Vulcan", "Independent", "Mirror Universe" ];
 
 module.exports = function(grunt) {
@@ -433,7 +438,7 @@ function convertIconTags(str) {
 	str = str.replace( /\[eva(de|sive|sion)( maneuvers)?\]/ig, "[evade]" );
 	str = str.replace( /\[target ?lock\]/ig, "[target-lock]" );
 	str = str.replace( /\[scan\]/ig, "[scan]" );
-	str = str.replace( /\[battle ?stations\]/ig, "[battlestations]" );
+	str = str.replace( /\[battle ?stations?\]/ig, "[battlestations]" );
 	str = str.replace( /\[cloak\]/ig, "[cloak]" );
 	str = str.replace( /\[sensor ?echo\]/ig, "[sensor-echo]" );
 	str = str.replace( /\[regenerate\]/ig, "[regenerate]" );
