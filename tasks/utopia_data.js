@@ -16,7 +16,7 @@ var ignoreCards = [ "jean_luc_picard_71531", "jean_luc_picard_c_71531", "jean_lu
 					"systems_upgrade_c_71998p", "systems_upgrade_w_71998p",
 					"assault_vessel_upgrade_w_71803", "assault_vessel_upgrade_c_71803",
 				  ];
-var factions = [ "Federation", "Klingon", "Romulan", "Dominion", "Borg", "Species 8472", "Kazon", "Bajoran", "Ferengi", "Vulcan", "Independent", "Mirror Universe" ];
+var factions = [ "Federation", "Klingon", "Romulan", "Dominion", "Borg", "Species 8472", "Kazon", "Bajoran", "Ferengi", "Vulcan", "Independent", "Mirror Universe", "Q Continuum" ];
 
 module.exports = function(grunt) {
 
