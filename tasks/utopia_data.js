@@ -15,6 +15,7 @@ var ignoreCards = [ "jean_luc_picard_71531", "jean_luc_picard_c_71531", "jean_lu
 					"sakharov_c_71997p",
 					"systems_upgrade_c_71998p", "systems_upgrade_w_71998p",
 					"assault_vessel_upgrade_w_71803", "assault_vessel_upgrade_c_71803",
+					"quark_weapon_71786",
 				  ];
 var factions = [ "Federation", "Klingon", "Romulan", "Dominion", "Borg", "Species 8472", "Kazon", "Bajoran", "Ferengi", "Vulcan", "Independent", "Mirror Universe", "Q Continuum" ];
 
@@ -50,18 +51,23 @@ module.exports = function(grunt) {
 		};
 	  
 		src.forEach( function(file) {
-			
-			console.log(file);
-			
-			if( file.indexOf(".xml") >= 0 )
+
+			if( file.indexOf(".xml") >= 0 ) {
+				console.log(file);
 				parseXML( grunt, file, out );
-			else if( file.indexOf(".json") >= 0 )
-				parseJSON( grunt, file, out );
-			else
-				grunt.fail.warn("Unable to parse file type: " + file);
+			}
 
 		} );
 
+		src.forEach( function(file) {
+			
+			if( file.indexOf(".json") >= 0 ) {
+				console.log(file);
+				parseJSON( grunt, file, out );
+			}
+
+		} );
+		
       // Write the destination file.
       grunt.file.write(f.dest, JSON.stringify(out));
 
@@ -469,13 +475,27 @@ function adjustFactions(card) {
 	
 }
 
+// Any cards defined in .json overwrite .xml cards
+function addToList( item, list ) {
+
+	for( var i = 0; i < list.length; i++ )
+		if( list[i].id == item.id ) {
+			console.log("Overwriting duplicate:",item.type,item.id);
+			list[i] = item;
+			return;
+		}
+
+	list.push(item);
+	
+}
+
 function parseJSON( grunt, file, out ) {
 	
 	var data = JSON.parse( grunt.file.read(file) );
 	
 	Object.keys(data).forEach( function(key) {
 		data[key].forEach( function(item) {
-			out[key].push(item);
+			addToList( item, out[key] );
 		});
 	});
 	
