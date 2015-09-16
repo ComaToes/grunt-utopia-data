@@ -17,7 +17,7 @@ var ignoreCards = [ "jean_luc_picard_71531", "jean_luc_picard_c_71531", "jean_lu
 					"assault_vessel_upgrade_w_71803", "assault_vessel_upgrade_c_71803",
 					"quark_weapon_71786",
 				  ];
-var factions = [ "Federation", "Klingon", "Romulan", "Dominion", "Borg", "Species 8472", "Kazon", "Bajoran", "Ferengi", "Vulcan", "Independent", "Mirror Universe", "Q Continuum" ];
+var factions = [ "Federation", "Klingon", "Romulan", "Dominion", "Borg", "Species 8472", "Kazon", "Xindi", "Bajoran", "Ferengi", "Vulcan", "Independent", "Mirror Universe", "Q Continuum" ];
 
 module.exports = function(grunt) {
 
@@ -478,12 +478,13 @@ function adjustFactions(card) {
 // Any cards defined in .json overwrite .xml cards
 function addToList( item, list ) {
 
-	for( var i = 0; i < list.length; i++ )
-		if( list[i].id == item.id ) {
-			console.log("Overwriting duplicate:",item.type,item.id);
-			list[i] = item;
-			return;
-		}
+	if( item.id )
+		for( var i = 0; i < list.length; i++ )
+			if( list[i].id == item.id ) {
+				console.log("Overwriting duplicate:",item.type,item.id);
+				list[i] = item;
+				return;
+			}
 
 	list.push(item);
 	
